@@ -15,17 +15,26 @@ class ImageField extends StatelessWidget {
       children: [
         BlocBuilder<AchievementFormBloc, AchievementFormState>(
           buildWhen: (p, c) =>
-              p.imagePath != c.imagePath ||
-              p.achievement.imageUrl != c.achievement.imageUrl,
+              p.imagePath != c.imagePath || p.isEditing != c.isEditing,
           builder: (context, state) {
             final imagePath = state.imagePath.toNullable();
 
-            if (imagePath == null) return const SizedBox();
-
-            if (state.achievement.imageUrl.isNotEmpty) {
+            if (imagePath != null) {
               return Container(
-                height: 80,
-                width: 80,
+                height: 200,
+                width: 200,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: FileImage(
+                      File(imagePath),
+                    ),
+                  ),
+                ),
+              );
+            } else if (state.achievement.imageUrl.isNotEmpty) {
+              return Container(
+                height: 200,
+                width: 200,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: NetworkImage(
@@ -36,17 +45,7 @@ class ImageField extends StatelessWidget {
               );
             }
 
-            return Container(
-              height: 80,
-              width: 80,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: FileImage(
-                    File(imagePath),
-                  ),
-                ),
-              ),
-            );
+            return const SizedBox();
           },
         ),
         const SizedBox(
