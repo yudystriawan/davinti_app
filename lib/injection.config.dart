@@ -8,9 +8,10 @@ import 'package:dio/dio.dart' as _i3;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import 'application/achievement/form/achievement_form_bloc.dart' as _i7;
-import 'application/achievement/loader/achievement_loader_bloc.dart' as _i8;
-import 'common/di/dio_di.dart' as _i9;
+import 'application/achievement/actor/achievement_actor_bloc.dart' as _i7;
+import 'application/achievement/form/achievement_form_bloc.dart' as _i8;
+import 'application/achievement/loader/achievement_loader_bloc.dart' as _i9;
+import 'common/di/dio_di.dart' as _i10;
 import 'domain/achievement/i_achievement_repository.dart' as _i5;
 import 'infrastructure/achievement/achievement_repository.dart' as _i6;
 import 'infrastructure/achievement/data_sources/remote_data_provider.dart'
@@ -27,11 +28,13 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       () => _i4.AchievementRemoteDataProvider(get<_i3.Dio>()));
   gh.factory<_i5.IAchievementRepository>(() =>
       _i6.AchievementRepository(get<_i4.AchievementRemoteDataProvider>()));
-  gh.factory<_i7.AchievementFormBloc>(
-      () => _i7.AchievementFormBloc(get<_i5.IAchievementRepository>()));
-  gh.factory<_i8.AchievementLoaderBloc>(
-      () => _i8.AchievementLoaderBloc(get<_i5.IAchievementRepository>()));
+  gh.factory<_i7.AchievementActorBloc>(
+      () => _i7.AchievementActorBloc(get<_i5.IAchievementRepository>()));
+  gh.factory<_i8.AchievementFormBloc>(
+      () => _i8.AchievementFormBloc(get<_i5.IAchievementRepository>()));
+  gh.factory<_i9.AchievementLoaderBloc>(
+      () => _i9.AchievementLoaderBloc(get<_i5.IAchievementRepository>()));
   return get;
 }
 
-class _$DioDi extends _i9.DioDi {}
+class _$DioDi extends _i10.DioDi {}

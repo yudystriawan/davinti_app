@@ -31,18 +31,6 @@ class ImageField extends StatelessWidget {
                   ),
                 ),
               );
-            } else if (state.achievement.imageUrl.isNotEmpty) {
-              return Container(
-                height: 200,
-                width: 200,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(
-                      state.achievement.imageUrl,
-                    ),
-                  ),
-                ),
-              );
             }
 
             return const SizedBox();

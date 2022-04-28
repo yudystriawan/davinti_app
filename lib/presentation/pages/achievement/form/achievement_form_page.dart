@@ -8,6 +8,7 @@ import 'package:my_app/injection.dart';
 import 'package:my_app/presentation/components/loading_indicator.dart';
 import 'package:my_app/presentation/pages/achievement/form/widgets/image_field.dart';
 import 'package:my_app/presentation/pages/achievement/form/widgets/name_field.dart';
+import 'package:my_app/presentation/routes/app_router.gr.dart';
 
 import '../../../../application/achievement/form/achievement_form_bloc.dart';
 import 'widgets/level_field.dart';
@@ -50,7 +51,11 @@ class AchievementFormPage extends StatelessWidget implements AutoRouteWrapper {
             },
             (_) => Fluttertoast.showToast(
               msg: state.isEditing ? 'Berhasil diubah' : 'Berhasil ditambahkan',
-            ).then((_) => AutoRouter.of(context).pop()),
+            ).then(
+              (_) => AutoRouter.of(context).popUntil(
+                (route) => route.settings.name == AchievementOverviewRoute.name,
+              ),
+            ),
           ),
         );
       },

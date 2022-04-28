@@ -51,42 +51,12 @@ class ListAchievementWidget extends StatelessWidget {
                     ),
                   ),
                   title: Text(achievement.name),
-                  trailing: IconButton(
-                    onPressed: () {
-                      showDialog<bool>(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: Text('Menghapus ${achievement.name} ?'),
-                          content: const Text('Data akan terhapus selamanya.'),
-                          actions: [
-                            ElevatedButton(
-                              onPressed: () => Navigator.pop(context, false),
-                              child: const Text('Tidak jadi'),
-                            ),
-                            TextButton(
-                              onPressed: () => Navigator.pop(context, true),
-                              child: const Text('Iya'),
-                            ),
-                          ],
-                        ),
-                      ).then((value) {
-                        if (value == null) return;
-                        if (value) {
-                          debugPrint('deleted');
-                        }
-                      });
-                    },
-                    icon: const Icon(
-                      Icons.delete_forever,
-                      color: Colors.red,
-                    ),
-                  ),
                   subtitle: Text(
                     '${achievement.level}, ${achievement.organized}',
                   ),
                   onTap: () => AutoRouter.of(context)
                       .push(
-                        AchievementFormRoute(achievement: achievement),
+                        AchievementDetailRoute(achievement: achievement),
                       )
                       .then((value) => context
                           .read<AchievementLoaderBloc>()
